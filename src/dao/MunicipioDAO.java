@@ -20,31 +20,6 @@ import javax.swing.JOptionPane;
 //classe para executar os comandos SQL 
 public class MunicipioDAO {
 	
-	//inserir topicos no BD
-//	public void insert(MunicipioDTO municipioDTO) {
-//		
-//		try {
-//			// ativa conexão com BD
-//			Connection connection = ConexaoUtil.getInstance().getConnection();
-//			// código sql a ser executado
-//			// o ? será trocado, em tempo de execução, pelo valor a ser inserido no BD
-//			String sql = "INSERT INTO topicos (topico) VALUES (?)";
-//			// realiza uma ponte entre o java e o BD
-//			PreparedStatement statement = connection.prepareStatement(sql);
-//			// faz a alteração do ? da variavel sql para o valor a ser passado para o insert
-//			// primeiro parâmetro indica qual o ponto de interrogação será alterado (1 é o
-//			// primeiro, 2 é o segundo...)
-//			// segundo parâmetro é o valor a ser inserido
-//			statement.setString(1, municipioDTO.getTopico());
-//			// Executar o comando sql com os devidos valores
-//			statement.execute();
-//			// fechar conexao com bd
-//			statement.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
 	//Recupera lista de tópicos no BD
     public List<MunicipioDTO> listaMunicipios() throws ClassNotFoundException, SQLException{
 
@@ -58,7 +33,7 @@ public class MunicipioDAO {
 
         try {
         	
-			String sql = "SELECT * FROM Municipio";
+			String sql = "SELECT * FROM Municipio ORDER BY Nome";
 			// realiza uma ponte entre o java e o BD
 			statement = connection.prepareStatement(sql);        	
         	

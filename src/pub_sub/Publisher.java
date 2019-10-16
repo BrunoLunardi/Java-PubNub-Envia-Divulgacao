@@ -26,8 +26,8 @@ public class Publisher {
     
     public void publishMessage(String mensagem) {
     	
-        position.addProperty("lat", 32L);
-        position.addProperty("lng", 32L);
+//        position.addProperty("lat", 32L);
+//        position.addProperty("lng", 32L);
     	
         try {
             pubnub.publish().channel(channelName).message(mensagem).async(new PNCallback<PNPublishResult>() {

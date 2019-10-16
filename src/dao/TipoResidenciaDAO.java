@@ -50,7 +50,7 @@ public class TipoResidenciaDAO {
 
         try {
         	
-			String sql = "SELECT * FROM tipo_residencia";
+			String sql = "SELECT * FROM tipo_residencia ORDER BY tipo_residencia";
 			// realiza uma ponte entre o java e o BD
 			statement = connection.prepareStatement(sql);        	
         	
@@ -71,7 +71,6 @@ public class TipoResidenciaDAO {
         } catch (SQLException ex) {
             Logger.getLogger(MunicipioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            //ConnectionFactory.closeConnection(con, stmt, rs);
         	statement.close();
         }
 
