@@ -24,22 +24,22 @@ public class Publisher {
         pubnub = new PubNub(pnConfiguration);    	
     }
     
-    public void publishMessage() {
+    public void publishMessage(String mensagem) {
     	
         position.addProperty("lat", 32L);
         position.addProperty("lng", 32L);
     	
         try {
-            pubnub.publish().channel(channelName).message(position).async(new PNCallback<PNPublishResult>() {
+            pubnub.publish().channel(channelName).message(mensagem).async(new PNCallback<PNPublishResult>() {
                 @Override
                 public void onResponse(PNPublishResult result, PNStatus status) {
                     // handle publish response
                 }
             });
-          /*  pubnub.subscribe()
+            pubnub.subscribe()
                     .channels(Arrays.asList(channelName)) // subscribe to channels
                     .withPresence() // also subscribe to related presence information
-                    .execute();*/
+                    .execute();
         } catch (Exception e) {
             System.out.println("Erro na Configuração");
             e.printStackTrace();

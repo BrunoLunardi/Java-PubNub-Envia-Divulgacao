@@ -16,9 +16,8 @@ import dto.TipoResidenciaDTO;
 public class TipoResidenciaDAO {
 
 	//inserir topicos no BD
-	public void insert(TipoResidenciaDTO tipoResidenciaDTO) {
+	public void insert(TipoResidenciaDTO tipoResidenciaDTO) throws Exception {
 		
-		try {
 			// ativa conexão com BD
 			Connection connection = ConexaoUtil.getInstance().getConnection();
 			// código sql a ser executado
@@ -35,9 +34,7 @@ public class TipoResidenciaDAO {
 			statement.execute();
 			// fechar conexao com bd
 			statement.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 	
 	//Recupera lista de tópicos no BD

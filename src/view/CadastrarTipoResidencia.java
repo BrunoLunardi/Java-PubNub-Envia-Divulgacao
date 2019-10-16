@@ -10,10 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-//import dao.TopicoDAO;
-//import dto.TopicoDTO;
+import dao.TipoResidenciaDAO;
+import dto.TipoResidenciaDTO;
 
-public class CadastrarTopico extends JFrame {
+public class CadastrarTipoResidencia extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -21,7 +21,7 @@ public class CadastrarTopico extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastrarTopico() {
+	public CadastrarTipoResidencia() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -29,11 +29,11 @@ public class CadastrarTopico extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Cadastrar Tópico");
+		JLabel lblNewLabel = new JLabel("Cadastrar Tipo Residência");
 		lblNewLabel.setBounds(12, 15, 322, 15);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField("EX: residencia/casa");
+		textField = new JTextField();
 		textField.setBounds(12, 42, 426, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -42,20 +42,24 @@ public class CadastrarTopico extends JFrame {
 		
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//cria objeto do tipo TopicoDTO com o nome do topico passado
-//				TopicoDTO topicoDTO = new TopicoDTO(textField.getText().toLowerCase());
-				//objeto para executar sql de insert no bd
-//				TopicoDAO topicoDAO = new TopicoDAO();
-				//metodo para realizar insert no BD
-//				topicoDAO.insert(topicoDTO);
 				
-				//exibe resultado na tela
-				JOptionPane.showMessageDialog(null, "Tópico cadastrado com sucesso" ,"Tópico cadastrado",
+				try {
+					//cria objeto do tipo TopicoDTO com o nome do topico passado
+					TipoResidenciaDTO tipoResidenciaDTO = new TipoResidenciaDTO(textField.getText().toLowerCase());
+					//objeto para executar sql de insert no bd
+					TipoResidenciaDAO tipoResidenciaDAO = new TipoResidenciaDAO();
+					//metodo para realizar insert no BD
+					tipoResidenciaDAO.insert(tipoResidenciaDTO);
+					//exibe resultado na tela
+					JOptionPane.showMessageDialog(null, "Tipo de residência cadastrado com sucesso" ,"Sucesso",
 						JOptionPane.INFORMATION_MESSAGE);	
-				
-				Main frame = new Main();
-				frame.setVisible(true);
-				dispose();				
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					Main frame = new Main();
+					frame.setVisible(true);
+					dispose();
+				}
 				
 			}
 		});		

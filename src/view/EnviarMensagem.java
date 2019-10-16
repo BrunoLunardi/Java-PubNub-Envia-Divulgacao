@@ -103,9 +103,7 @@ public class EnviarMensagem extends JFrame{
 		contentPane.add(lblTexto);
 		
 		JTextArea area = new JTextArea();
-		area.setText("Coloque seu texto aqui");
-		//area.setBorder(new EmptyBorder(20, 20, 20, 20));
-		//area.setBounds(12, 140, 426, 40);
+		area.setText("");
 
 		JScrollPane jScrollPane = new JScrollPane(area); //jTextArea dentro do JScrollPane
 		jScrollPane.setBounds(new Rectangle(53, 175, 361, 80)); // tamanho do jScrollPane
@@ -123,28 +121,21 @@ public class EnviarMensagem extends JFrame{
 		
 		btnEnviarMensagem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				String topicoSelecionado = (String) jcTipoResidencia.getSelectedItem();
-				
 				
 				//chamada para validar campos para aceitarem apenas número
-				if( ValidarCampoNumerico(textValor) ) { 
-					System.out.println(textValor.getText() + " " + 
-							topicoSelecionado + " " +
-							area.getText()
-							);
-
+				if( ValidarCampoNumerico(textValor) ) {
+					
+					Publisher pub = new Publisher();
+					
 					//monta a string que será enviada para o broker
 					String mensagem =  
-							"Valor = " +
-							textValor.getText()  + " \n" +
-							"Informações: " +
-							area.getText();
+							"Tipo Residência = " + jcTipoResidencia.getSelectedItem() + "\n" +
+							"Município: " + jcMunicipio.getSelectedItem()  + "\n" +
+							"Valor: " + textValor.getText()  + "\n" +
+							"Mensagem: " + area.getText();
+					System.out.println(mensagem);
 					
-					//Colocar valor do combobox da acao
-					String id_acao = "1";
-					
-		
+					pub.publishMessage(mensagem);
 					
 				}				
 				

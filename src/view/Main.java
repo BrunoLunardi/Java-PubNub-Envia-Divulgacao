@@ -55,21 +55,21 @@ public class Main extends JFrame {
 				
 			}
 		});
-		button.setBounds(126, 86, 191, 25);
+		button.setBounds(126, 86, 230, 25);
 		contentPane.add(button);		
 		
 		// Configurações do botão para chamar a tela de cadastrar tópics		
-		JButton btnNewButton = new JButton("Cadastrar Tópico");
+		JButton btnNewButton = new JButton("Cadastrar Tipo Residência");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//chama tela de cadastrar topicos
-				CadastrarTopico frame = new CadastrarTopico();
+				CadastrarTipoResidencia frame = new CadastrarTipoResidencia();
 				frame.setVisible(true);
 				//fecha esta tela para deixar só a de cadastrar topicos aberta
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(126, 148, 191, 25);
+		btnNewButton.setBounds(126, 148, 230, 25);
 		contentPane.add(btnNewButton);
 	
 		

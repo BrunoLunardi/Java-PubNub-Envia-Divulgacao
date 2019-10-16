@@ -6,6 +6,15 @@ public class TipoResidenciaDTO {
 	int id;
 	String tipoResidencia;
 	
+	//construtor utilizado para insert
+	public TipoResidenciaDTO(String tipoResidencia) {
+		this.tipoResidencia = tipoResidencia;
+		
+	}
+	
+	public TipoResidenciaDTO() {
+	}	
+	
 	/////////////////Getters and Setters////////////////
 	public int getId() {
 		return id;
