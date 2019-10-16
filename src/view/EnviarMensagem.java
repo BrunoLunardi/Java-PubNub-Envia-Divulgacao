@@ -18,8 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
 
-import dao.TopicoDAO;
-import dto.TopicoDTO;
+import dao.MunicipioDAO;
+import dao.TipoResidenciaDAO;
+import dto.MunicipioDTO;
+import dto.TipoResidenciaDTO;
 import pub_sub.Publisher;
 
 public class EnviarMensagem extends JFrame{
@@ -27,11 +29,14 @@ public class EnviarMensagem extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField textValor;
-	private JComboBox jcTipoResidencia, jcCidade;
+	private JComboBox jcTipoResidencia, jcMunicipio;
 	//objeto para executar sql de insert no bd
-	TopicoDAO topicoDAO = new TopicoDAO();
+	MunicipioDAO municipiosDAO = new MunicipioDAO();
 	//cria objeto do tipo TopicoDTO com o nome do topico passado
-	TopicoDTO topicoDTO;
+	MunicipioDTO municipiosDTO;
+	//objeto para executar sql de insert no bd
+	TipoResidenciaDAO tipoResidenciaDAO = new TipoResidenciaDAO();	
+	
 	
 	/**
 	 * Create the frame.
@@ -51,8 +56,8 @@ public class EnviarMensagem extends JFrame{
 		
 		jcTipoResidencia = new JComboBox();
 		try {
-			for(TopicoDTO t: topicoDAO.listaTopicos()) {
-				jcTipoResidencia.addItem(t.toString());
+			for(TipoResidenciaDTO m: tipoResidenciaDAO.listaTiposResidencia() ) {
+				jcTipoResidencia.addItem(m.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,21 +68,21 @@ public class EnviarMensagem extends JFrame{
 //////////////////////////fim campos para Residencia/////////////////////		
 
 //////////////////////////campos para Tipo Cidade/////////////////////				
-		JLabel lbCidade = new JLabel("Cidade:");
-		lbCidade.setBounds(12, 65, 322, 15);
-		contentPane.add(lbCidade);
+		JLabel lbMunicipio = new JLabel("Município:");
+		lbMunicipio.setBounds(12, 65, 322, 15);
+		contentPane.add(lbMunicipio);
 		
-		jcCidade = new JComboBox();
+		jcMunicipio = new JComboBox();
 		try {
-			for(TopicoDTO t: topicoDAO.listaTopicos()) {
-				jcCidade.addItem(t.toString());
+			for(MunicipioDTO m: municipiosDAO.listaMunicipios()) {
+				jcMunicipio.addItem(m.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		jcCidade.setBounds(12, 85, 426, 19);
-		contentPane.add(jcCidade);
+		jcMunicipio.setBounds(12, 85, 426, 19);
+		contentPane.add(jcMunicipio);
 //////////////////////////fim campos para Tipo Cidade/////////////////////			
 
 //////////////////////////campos para Valor Residência/////////////////////						
