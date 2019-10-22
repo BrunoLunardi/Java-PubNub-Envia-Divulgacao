@@ -129,13 +129,16 @@ public class EnviarMensagem extends JFrame{
 					
 					//monta a string que será enviada para o broker
 					String mensagem =  
-							"Tipo Residência = " + jcTipoResidencia.getSelectedItem() + "\n" +
-							"Município: " + jcMunicipio.getSelectedItem()  + "\n" +
-							"Valor: " + textValor.getText()  + "\n" +
+							"Tipo Residência: " + jcTipoResidencia.getSelectedItem() + "@" +
+							"Município: " + jcMunicipio.getSelectedItem()  + "@" +
+							"Valor: " + textValor.getText()  + "@" +
 							"Mensagem: " + area.getText();
 					System.out.println(mensagem);
 					
-					pub.publishMessage(mensagem);
+					pub.publishMessage((String)jcTipoResidencia.getSelectedItem(), 
+							textValor.getText(), 
+							(String) jcMunicipio.getSelectedItem(),
+							mensagem);
 					
 				}				
 				

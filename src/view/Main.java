@@ -59,7 +59,7 @@ public class Main extends JFrame {
 		contentPane.add(button);		
 		
 		// Configurações do botão para chamar a tela de cadastrar tópics		
-		JButton btnNewButton = new JButton("Cadastrar Tipo Residência");
+		JButton btnNewButton = new JButton("Cadastrar tipo residência");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//chama tela de cadastrar topicos

@@ -6,6 +6,8 @@ import com.pubnub.api.callbacks.PNCallback;
 import com.pubnub.api.models.consumer.PNPublishResult;
 import com.pubnub.api.models.consumer.PNStatus;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Publisher {
 	
@@ -24,13 +26,17 @@ public class Publisher {
         pubnub = new PubNub(pnConfiguration);    	
     }
     
-    public void publishMessage(String mensagem) {
+    public void publishMessage(String tipo_residencia, String valor, String municipio, String mensagem) {
     	
-//        position.addProperty("lat", 32L);
-//        position.addProperty("lng", 32L);
+    	//valores que serão filtrados
+    	Map<String, Object> meta = new HashMap<>();
+    	meta.put("valor_minimo", valor);
+    	meta.put("tipo_residencia", tipo_residencia);
+    	meta.put("municipio", municipio);
+    	//falta cidade e estado	
     	
         try {
-            pubnub.publish().channel(channelName).message(mensagem).async(new PNCallback<PNPublishResult>() {
+            pubnub.publish().channel(channelName).meta(meta).message(mensagem).async(new PNCallback<PNPublishResult>() {
                 @Override
                 public void onResponse(PNPublishResult result, PNStatus status) {
                     // handle publish response
