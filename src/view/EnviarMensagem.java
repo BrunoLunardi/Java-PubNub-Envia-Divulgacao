@@ -24,45 +24,43 @@ import dto.MunicipioDTO;
 import dto.TipoResidenciaDTO;
 import pub_sub.Publisher;
 
-public class EnviarMensagem extends JFrame{
-
+public class EnviarMensagem extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textValor;
-	private JComboBox jcTipoResidencia, jcMunicipio;
-	//objeto para executar sql de insert no bd
+	private JComboBox jcTipoResidencia, jcMunicipio, jcUf;
+	// objeto para executar sql de insert no bd
 	MunicipioDAO municipiosDAO = new MunicipioDAO();
-	//cria objeto do tipo TopicoDTO com o nome do topico passado
+	// cria objeto do tipo TopicoDTO com o nome do topico passado
 	MunicipioDTO municipiosDTO;
-	//objeto para executar sql de insert no bd
-	TipoResidenciaDAO tipoResidenciaDAO = new TipoResidenciaDAO();	
-	
-	
+	// objeto para executar sql de insert no bd
+	TipoResidenciaDAO tipoResidenciaDAO = new TipoResidenciaDAO();
+
 	/**
 	 * Create the frame.
 	 */
 	public EnviarMensagem() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 350);
+		setBounds(100, 100, 450, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 //////////////////////////Campos para Tipo Residencia/////////////////////		
 		JLabel lbTipoResidencia = new JLabel("Tipo Residência:");
 		lbTipoResidencia.setBounds(12, 15, 322, 15);
 		contentPane.add(lbTipoResidencia);
-		
+
 		jcTipoResidencia = new JComboBox();
 		try {
-			for(TipoResidenciaDTO m: tipoResidenciaDAO.listaTiposResidencia() ) {
+			for (TipoResidenciaDTO m : tipoResidenciaDAO.listaTiposResidencia()) {
 				jcTipoResidencia.addItem(m.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		jcTipoResidencia.setBounds(12, 40, 426, 19);
 		contentPane.add(jcTipoResidencia);
 //////////////////////////fim campos para Residencia/////////////////////		
@@ -71,124 +69,142 @@ public class EnviarMensagem extends JFrame{
 		JLabel lbMunicipio = new JLabel("Município:");
 		lbMunicipio.setBounds(12, 65, 322, 15);
 		contentPane.add(lbMunicipio);
-		
+
 		jcMunicipio = new JComboBox();
 		try {
-			for(MunicipioDTO m: municipiosDAO.listaMunicipios()) {
+			jcMunicipio.addItem("null");
+			for (MunicipioDTO m : municipiosDAO.listaMunicipios()) {
 				jcMunicipio.addItem(m.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		jcMunicipio.setBounds(12, 85, 426, 19);
 		contentPane.add(jcMunicipio);
-//////////////////////////fim campos para Tipo Cidade/////////////////////			
+//////////////////////////fim campos para Tipo Cidade/////////////////////		
+
+//////////////////////////campos para UF/////////////////////				
+		JLabel lbUf = new JLabel("UF:");
+		lbUf.setBounds(12, 115, 322, 15);
+		contentPane.add(lbUf);
+
+		jcUf = new JComboBox();
+		try {
+			jcUf.addItem("null");
+			for (MunicipioDTO m : municipiosDAO.listaUF()) {
+				jcUf.addItem(m.getUf());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		jcUf.setBounds(12, 135, 426, 19);
+		contentPane.add(jcUf);
+//////////////////////////fim campos para UF/////////////////////			
 
 //////////////////////////campos para Valor Residência/////////////////////						
 		JLabel lblValor = new JLabel("Valor:");
-		lblValor.setBounds(12, 115, 322, 15);
+		lblValor.setBounds(12, 155, 322, 15);
 		contentPane.add(lblValor);
 
 		textValor = new JTextField("0");
-		textValor.setBounds(12, 135, 426, 19);
+		textValor.setBounds(12, 175, 426, 19);
 		contentPane.add(textValor);
 		textValor.setColumns(10);
 //////////////////////////fim campos para Valor Residência/////////////////////		
-		
-		
+
 //////////////////////////campos para texto sobre Residência/////////////////////								
 		JLabel lblTexto = new JLabel("Texto:");
-		lblTexto.setBounds(12, 155, 322, 15);
+		lblTexto.setBounds(12, 195, 322, 15);
 		contentPane.add(lblTexto);
-		
+
 		JTextArea area = new JTextArea();
 		area.setText("");
 
-		JScrollPane jScrollPane = new JScrollPane(area); //jTextArea dentro do JScrollPane
-		jScrollPane.setBounds(new Rectangle(53, 175, 361, 80)); // tamanho do jScrollPane
-		jScrollPane.setVerticalScrollBarPolicy(jScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); // só mostra a barra vertical se necessário
-		jScrollPane.setHorizontalScrollBarPolicy(jScrollPane.HORIZONTAL_SCROLLBAR_NEVER); // nunca mostra a barra de rolagem horizontal
+		JScrollPane jScrollPane = new JScrollPane(area); // jTextArea dentro do JScrollPane
+		jScrollPane.setBounds(new Rectangle(53, 215, 361, 80)); // tamanho do jScrollPane
+		jScrollPane.setVerticalScrollBarPolicy(jScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); // só mostra a barra vertical
+																							// se necessário
+		jScrollPane.setHorizontalScrollBarPolicy(jScrollPane.HORIZONTAL_SCROLLBAR_NEVER); // nunca mostra a barra de
+																							// rolagem horizontal
 		area.setWrapStyleWord(true);
 		area.setLineWrap(true); // quebra a linha
-		//area.getText();
-			
-        contentPane.add(jScrollPane);			
+		// area.getText();
+
+		contentPane.add(jScrollPane);
 //////////////////////////fim campos para texto sobre Residência/////////////////////								        
-        
+
 //////////////////////////botão Enviar Mensagem/////////////////////								        		
 		JButton btnEnviarMensagem = new JButton("Enivar Mensagem");
-		
+
 		btnEnviarMensagem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				//chamada para validar campos para aceitarem apenas número
-				if( ValidarCampoNumerico(textValor) ) {
-					
+
+				// chamada para validar campos para aceitarem apenas número
+				if (ValidarCampoNumerico(textValor)) {
+
 					Publisher pub = new Publisher();
-					
-					//monta a string que será enviada para o broker
-					String mensagem =  
-							"Tipo Residência: " + jcTipoResidencia.getSelectedItem() + "@" +
-							"Município: " + jcMunicipio.getSelectedItem()  + "@" +
-							"Valor: " + textValor.getText()  + "@" +
-							"Mensagem: " + area.getText();
+
+					// monta a string que será enviada para o broker
+					String mensagem = "Tipo Residência: " + jcTipoResidencia.getSelectedItem() + "@"
+							+ "Município: " + jcMunicipio.getSelectedItem() + "@" 
+							+ "UF: " + jcUf.getSelectedItem() + "@"
+							+ "Valor: " + textValor.getText() + "@" 
+							+ "Mensagem: " + area.getText();
 					System.out.println(mensagem);
-					
-					pub.publishMessage((String)jcTipoResidencia.getSelectedItem(), 
-							textValor.getText(), 
-							(String) jcMunicipio.getSelectedItem(),
-							mensagem);
-					
-				}				
-				
+
+					pub.publishMessage((String) jcTipoResidencia.getSelectedItem(), textValor.getText(),
+							(String) jcMunicipio.getSelectedItem(), mensagem);
+
+				}
+
 				Main frame = new Main();
 				frame.setVisible(true);
-				dispose();				
-				
-			}
-		});		
+				dispose();
 
-		btnEnviarMensagem.setBounds(242, 270, 170, 25);
+			}
+		});
+
+		btnEnviarMensagem.setBounds(242, 320, 170, 25);
 		contentPane.add(btnEnviarMensagem);
 //////////////////////////fim botão Enviar Mensagem/////////////////////								        			
 
 //////////////////////////botão Cancelar/////////////////////			
-		
+
 		JButton btnCancelar = new JButton("Cancelar");
-		
+
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Main frame = new Main();
 				frame.setVisible(true);
 				dispose();
 			}
-		});				
-		
-		btnCancelar.setBounds(53, 270, 114, 25);
+		});
+
+		btnCancelar.setBounds(53, 320, 114, 25);
 		contentPane.add(btnCancelar);
 //////////////////////////fim botão Cancelar/////////////////////					
-	}	
-		
-	//Método para validar JTextField como número
+	}
+
+	// Método para validar JTextField como número
 	public boolean ValidarCampoNumerico(JTextField TextoCampo) {
 		Double valor;
-		if (TextoCampo.getText().length() != 0){
+		if (TextoCampo.getText().length() != 0) {
 			try {
 				valor = Double.parseDouble(TextoCampo.getText());
-			}catch(NumberFormatException ex){
-				JOptionPane.showMessageDialog(null, "Digite um valor válido!" ,"Erro de valor",
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Digite um valor válido!", "Erro de valor",
 						JOptionPane.INFORMATION_MESSAGE);
 				TextoCampo.grabFocus();
 				return false;
 			}
-		}else {
-			JOptionPane.showMessageDialog(null, "Digite um número" ,"Erro de valor",
-					JOptionPane.INFORMATION_MESSAGE);
-			TextoCampo.grabFocus();			
+		} else {
+			JOptionPane.showMessageDialog(null, "Digite um número", "Erro de valor", JOptionPane.INFORMATION_MESSAGE);
+			TextoCampo.grabFocus();
 			return false;
 		}
 		return true;
-	}		
-	
+	}
+
 }

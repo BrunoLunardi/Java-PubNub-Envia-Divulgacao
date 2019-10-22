@@ -63,6 +63,47 @@ public class MunicipioDAO {
         return municipios;
 
     }	
-	
+    
+	//Recupera lista de tópicos no BD
+    public List<MunicipioDTO> listaUF() throws ClassNotFoundException, SQLException{
+
+		// ativa conexão com BD
+		Connection connection = ConexaoUtil.getInstance().getConnection();
+        
+		PreparedStatement statement = null;
+        ResultSet rs = null;
+
+        List<MunicipioDTO> municipios = new ArrayList<>();
+
+        try {
+        	
+			String sql = "SELECT DISTINCT Uf FROM Municipio ORDER BY Uf";
+			// realiza uma ponte entre o java e o BD
+			statement = connection.prepareStatement(sql);        	
+        	
+            //stmt = connection.prepareStatement("SELECT * FROM topicos");
+            rs = statement.executeQuery();
+
+            while (rs.next()) {
+
+            	MunicipioDTO municipio = new MunicipioDTO();
+            		
+            	//recupera valores de acordo com as colunas do BD
+            	municipio.setUf(rs.getString("Uf"));
+            	//adiciona o municipio na lista de municipios
+            	municipios.add(municipio);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MunicipioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            //ConnectionFactory.closeConnection(con, stmt, rs);
+        	statement.close();
+        }
+
+        return municipios;
+
+    }	    
+	  
 
 }
