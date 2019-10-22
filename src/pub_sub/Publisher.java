@@ -26,13 +26,15 @@ public class Publisher {
         pubnub = new PubNub(pnConfiguration);    	
     }
     
-    public void publishMessage(String tipo_residencia, String valor, String municipio, String mensagem) {
+    public void publishMessage(String tipo_residencia, String valor, String municipio, 
+    		String uf, String mensagem) {
     	
     	//valores que serão filtrados
     	Map<String, Object> meta = new HashMap<>();
     	meta.put("valor_minimo", valor);
     	meta.put("tipo_residencia", tipo_residencia);
     	meta.put("municipio", municipio);
+    	meta.put("uf", uf);
     	//falta cidade e estado	
     	
         try {

@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 //classe para executar os comandos SQL 
 public class MunicipioDAO {
 	
-	//Recupera lista de tópicos no BD
+	//Recupera lista de municipios no BD
     public List<MunicipioDTO> listaMunicipios() throws ClassNotFoundException, SQLException{
 
 		// ativa conexão com BD
@@ -64,7 +64,7 @@ public class MunicipioDAO {
 
     }	
     
-	//Recupera lista de tópicos no BD
+	//Recupera lista de UF no BD
     public List<MunicipioDTO> listaUF() throws ClassNotFoundException, SQLException{
 
 		// ativa conexão com BD
@@ -73,7 +73,7 @@ public class MunicipioDAO {
 		PreparedStatement statement = null;
         ResultSet rs = null;
 
-        List<MunicipioDTO> municipios = new ArrayList<>();
+        List<MunicipioDTO> ufs = new ArrayList<>();
 
         try {
         	
@@ -86,12 +86,12 @@ public class MunicipioDAO {
 
             while (rs.next()) {
 
-            	MunicipioDTO municipio = new MunicipioDTO();
+            	MunicipioDTO uf = new MunicipioDTO();
             		
             	//recupera valores de acordo com as colunas do BD
-            	municipio.setUf(rs.getString("Uf"));
+            	uf.setUf(rs.getString("Uf"));
             	//adiciona o municipio na lista de municipios
-            	municipios.add(municipio);
+            	ufs.add(uf);
             }
 
         } catch (SQLException ex) {
@@ -101,7 +101,7 @@ public class MunicipioDAO {
         	statement.close();
         }
 
-        return municipios;
+        return ufs;
 
     }	    
 	  
