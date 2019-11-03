@@ -15,7 +15,7 @@ public class Publisher {
     final String SubKey = "sub-c-55c41470-ead1-11e9-bdee-36080f78eb20";	
     final String channelName = "divulgacao";
     PubNub pubnub;
-    JsonObject position = new JsonObject();
+    //JsonObject position = new JsonObject();
     
     //configurações para pubnub
     public Publisher() {
@@ -54,6 +54,5 @@ public class Publisher {
         }    	
     	
     }
-
 }
 

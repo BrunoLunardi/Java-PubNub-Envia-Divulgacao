@@ -1,0 +1,12 @@
+Criação de tabelas
+--filtro
+create table filtro (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, nome_filtro varchar(100) UNIQUE, municipio VARCHAR(255), tipo_residencia varchar(100), valor_minimo varchar(100), uf varchar(10));
+
+--Municipio
+create table Municipio (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, codigo int(11), nome varchar(255), uf varchar(10));
+
+--tipo_residencia
+create table tipo_residencia (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, tipo_residencia varchar(100) UNIQUE);
+
+
+

@@ -53,6 +53,7 @@ public class EnviarMensagem extends JFrame {
 		contentPane.add(lbTipoResidencia);
 
 		jcTipoResidencia = new JComboBox();
+		jcTipoResidencia.addItem("null");
 		try {
 			for (TipoResidenciaDTO m : tipoResidenciaDAO.listaTiposResidencia()) {
 				jcTipoResidencia.addItem(m.toString());
