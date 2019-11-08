@@ -137,7 +137,7 @@ public class EnviarMensagem extends JFrame {
 //////////////////////////fim campos para texto sobre Residência/////////////////////								        
 
 //////////////////////////botão Enviar Mensagem/////////////////////								        		
-		JButton btnEnviarMensagem = new JButton("Enivar Mensagem");
+		JButton btnEnviarMensagem = new JButton("Enviar Mensagem");
 
 		btnEnviarMensagem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
